@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("References")]
+    public Transform playerBody;
+    
     [Header("Actions")]
     public InputAction lookAction;
     public InputAction unlockCursorAction;
@@ -13,8 +16,8 @@ public class CameraController : MonoBehaviour
     public float upperLookLimit = 80f;
     public float lowerLookLimit = -80f;
 
+    // Private Variables
     private float xRotation = 0f;
-    private float yRotation = 0f;
 
     void OnEnable()
     {
@@ -39,13 +42,11 @@ public class CameraController : MonoBehaviour
 
         Vector3 currentRotation = transform.localEulerAngles;
         xRotation = currentRotation.x;
-        yRotation = currentRotation.y;
-
         if (xRotation > 180) xRotation -= 360f;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (unlockCursorAction.WasPressedThisFrame())
         {
@@ -63,12 +64,12 @@ public class CameraController : MonoBehaviour
         {
             Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
 
-            yRotation += mouseDelta.x * sensitivity;
+            playerBody.Rotate(Vector3.up * mouseDelta.x * sensitivity);
+
             xRotation -= mouseDelta.y * sensitivity;
-            
             xRotation = Mathf.Clamp(xRotation, lowerLookLimit, upperLookLimit);
 
-            transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         }
     }
 }

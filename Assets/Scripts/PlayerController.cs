@@ -1,46 +1,78 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public InputAction movementAction;
+    [Header("References")]
+    public Transform camera;
+
+    [Header("Actions")]
+    public InputAction moveAction;
     public InputAction jumpAction;
-    public InputAction sprintAction;
 
-    [Header("Settings")]
-    public float walkSpeed = 1.0f;
-    public float sprintSpeed = 2.0f;
+    [Header("Movement Settings")]
+    public float moveSpeed = 6.0f;
+    public float gravity = -9.81f;
+    public float jumpHeight = 2.0f;
 
-    public void OnEnable()
-    {
-        movementAction.Enable();
+    [Header("Ground Check Settings")]
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    void OnEnable() 
+    { 
+        moveAction.Enable(); 
         jumpAction.Enable();
-        sprintAction.Enable();
+    }
+    void OnDisable() 
+    { 
+        moveAction.Disable(); 
+        jumpAction.Disable();
     }
 
-    public void OnDisable()
-    {
-        movementAction.Disable();
-        jumpAction.Disable();
-        sprintAction.Disable();
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = movementAction.ReadValue<Vector2>();
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (sprintAction.IsPressed()){
-            transform.position += (Vector3)moveInput * walkSpeed * Time.deltaTime * sprintSpeed;
-        } else
+        if (isGrounded && velocity.y < 0)
         {
-            transform.position += (Vector3)moveInput * walkSpeed * Time.deltaTime;
+            velocity.y = -2f; 
         }
+
+        Vector2 inputVector = moveAction.ReadValue<Vector2>();
+
+        Vector3 forward = camera.forward;
+        Vector3 right = camera.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * inputVector.y) + (right * inputVector.x);
+
+        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+        if (jumpAction.WasPressedThisFrame() && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 }
