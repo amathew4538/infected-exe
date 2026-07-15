@@ -7099,7 +7099,7 @@ GameObject:
   - component: {fileID: 5053010881956024260}
   - component: {fileID: 5155141039898746959}
   m_Layer: 0
-  m_Name: RoomSpawn01
+  m_Name: Spawn01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8439,7 +8439,7 @@ Transform:
   m_GameObject: {fileID: 7315342525277717615}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32563, y: 0, z: 9.78517}
+  m_LocalPosition: {x: 0, y: 0, z: 10.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

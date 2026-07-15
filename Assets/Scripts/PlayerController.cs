@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+    private float originalStepOffset;
 
     void OnEnable() 
     { 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        originalStepOffset = controller.stepOffset;
     }
 
     // Update is called once per frame
@@ -64,6 +66,15 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = (forward * inputVector.y) + (right * inputVector.x);
 
+        if (isGrounded)
+        {
+            controller.stepOffset = originalStepOffset;
+        }
+        else
+        {
+            controller.stepOffset = 0f;
+        }
+
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         if (jumpAction.WasPressedThisFrame() && isGrounded)
@@ -72,7 +83,6 @@ public class PlayerController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
     }
 }
