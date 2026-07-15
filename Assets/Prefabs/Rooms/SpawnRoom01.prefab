@@ -7099,7 +7099,7 @@ GameObject:
   - component: {fileID: 5053010881956024260}
   - component: {fileID: 5155141039898746959}
   m_Layer: 0
-  m_Name: Spawn01
+  m_Name: SpawnRoom01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

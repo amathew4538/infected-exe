@@ -218,6 +218,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea3c13d0ae04688ab367c2d12c2391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f8b70ac2-6e89-4e51-8785-90bd963a1e13
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5acd02ad-38b2-42f8-97b6-98dbf7c5adcb
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
+    m_Flags: 0
+  interactionRange: 3
 --- !u!1 &1799801907134947585
 GameObject:
   m_ObjectHideFlags: 0

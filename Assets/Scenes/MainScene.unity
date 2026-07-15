@@ -148,6 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d575f407fe14874bfa028d74a3e173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
+  rooms: []
+  startingRooms:
+  - {fileID: 5155141039898746959, guid: b9d4789a4e6a34d32b957ae1321b837f, type: 3}
+  - {fileID: 6903808050539366402, guid: 1fc6e72afdd5a43d7831259a5b01efbf, type: 3}
+  - {fileID: 229399316383263990, guid: 7ad2a96c85dd741bc85fdd901579cea2, type: 3}
+  maxPrevRooms: 3
+  maxNextRooms: 3
+  totalRoomsToSpawn: 10
 --- !u!4 &86121995
 Transform:
   m_ObjectHideFlags: 0
