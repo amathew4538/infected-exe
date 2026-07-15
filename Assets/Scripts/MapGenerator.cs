@@ -4,15 +4,17 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     [Header("Room Settings")]
-    public List<Room> rooms;
+    public List<Room> randomRooms;
     public List<Room> startingRooms;
 
     [Header("Settings")]
-    public int maxPrevRooms = 3;
-    public int maxNextRooms = 3;
-    public int totalRoomsToSpawn = 10;
+    public int maxRooms = 7;
+    public int totalRandomRoomsToSpawn = 10;
 
-    private Room lastSpawnedRoom;
+    [Header("Info")]
+    public Room lastSpawnedRoom;
+    public int currentRoomCount;
+    public List<Room> currentSpawnedRooms;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +22,11 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < startingRooms.Count; i++)
         {
             SpawnSpecificRoom(startingRooms[i]);
+        }
+
+        for (int i = 0; i < totalRandomRoomsToSpawn; i++)
+        {
+            SpawnRandomRoom();
         }
     }
 
@@ -37,6 +44,8 @@ public class MapGenerator : MonoBehaviour
             
             transform.position = lastSpawnedRoom.exitPoint.transform.position;
             transform.rotation = lastSpawnedRoom.exitPoint.transform.rotation;
+            
+            currentSpawnedRooms.Add(lastSpawnedRoom);
         } 
         else
         {
@@ -52,6 +61,15 @@ public class MapGenerator : MonoBehaviour
 
             transform.position = lastSpawnedRoom.exitPoint.transform.position;
             transform.rotation = lastSpawnedRoom.exitPoint.transform.rotation;
+
+            currentSpawnedRooms.Add(lastSpawnedRoom);
         }
+    }
+
+    void SpawnRandomRoom()
+    {
+        int randomInteger = Random.Range(0, randomRooms.Count);
+
+        SpawnSpecificRoom(randomRooms[randomInteger]);
     }
 }

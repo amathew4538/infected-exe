@@ -2,7 +2,7 @@
 
 ## Description
 
-A procedurally-generated 3D horror game where you are stuck inside a computer, until, suddenly, the computer gets infected with a virus.
+A procedurally-generated 3D horror game where you are stuck inside a prototype computer, until, suddenly, the computer gets infected with a virus.
 Made in Unity.
 
 Idea: A Roblox Doors-like game situated within a computer where you must make your way through rooms to escape.
