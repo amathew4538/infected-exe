@@ -10,11 +10,20 @@ public class PlayerController : MonoBehaviour
     [Header("Actions")]
     public InputAction moveAction;
     public InputAction jumpAction;
+    public InputAction sprintAction;
 
     [Header("Movement Settings")]
     public float moveSpeed = 6.0f;
     public float gravity = -9.81f;
     public float jumpHeight = 2.0f;
+
+    [Header("Sprint Settings")]
+    public float sprintValue = 100.0f;
+    public float maxSprint = 100.0f;
+    public float sprintDecay = 10.0f;
+    public float sprintMult = 2.0f;
+    public float sprintPause = 0f;
+    public float maxSprintPause = 1.0f;
 
     [Header("Ground Check Settings")]
     public Transform groundCheck;
@@ -25,16 +34,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float originalStepOffset;
+    private bool isHoldingSprint;
 
     void OnEnable() 
     { 
         moveAction.Enable(); 
         jumpAction.Enable();
+        sprintAction.Enable();
     }
     void OnDisable() 
     { 
         moveAction.Disable(); 
         jumpAction.Disable();
+        sprintAction.Disable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -75,7 +87,31 @@ public class PlayerController : MonoBehaviour
             controller.stepOffset = 0f;
         }
 
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        isHoldingSprint = sprintAction.IsPressed();
+
+        if (isHoldingSprint && sprintValue > 0.0f)
+        {
+            controller.Move(moveDirection * moveSpeed * Time.deltaTime * sprintMult);
+            sprintValue = Mathf.Clamp(sprintValue - sprintDecay * Time.deltaTime, 0.0f, maxSprint);
+            sprintPause = 0f;
+        } 
+        else
+        {
+            controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+            if (!isHoldingSprint)
+            {
+                if (sprintPause >= maxSprintPause)
+                {
+                    sprintValue = Mathf.Clamp(sprintValue + sprintDecay * Time.deltaTime, 0.0f, maxSprint);
+                }
+                else
+                {
+                    sprintPause += Time.deltaTime;
+                }
+            }
+        }
+
 
         if (jumpAction.WasPressedThisFrame() && isGrounded)
         {

@@ -14,10 +14,10 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactionRange))
         {
-            print("Hit Something");
+            // print("Hit an Object!");
         } else
         {
-            print("Missed");
+            // print("Missed");
         }
     }
 }

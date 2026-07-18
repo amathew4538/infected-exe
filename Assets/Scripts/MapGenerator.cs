@@ -8,8 +8,7 @@ public class MapGenerator : MonoBehaviour
     public List<Room> startingRooms;
 
     [Header("Settings")]
-    public int maxRooms = 7;
-    public int totalRandomRoomsToSpawn = 10;
+    public int maxRooms = 5;
 
     [Header("Info")]
     public Room lastSpawnedRoom;
@@ -24,7 +23,7 @@ public class MapGenerator : MonoBehaviour
             SpawnSpecificRoom(startingRooms[i]);
         }
 
-        for (int i = 0; i < totalRandomRoomsToSpawn; i++)
+        for (int i = 0; i < maxRooms; i++)
         {
             SpawnRandomRoom();
         }
@@ -69,7 +68,6 @@ public class MapGenerator : MonoBehaviour
     void SpawnRandomRoom()
     {
         int randomInteger = Random.Range(0, randomRooms.Count);
-
         SpawnSpecificRoom(randomRooms[randomInteger]);
     }
 }
