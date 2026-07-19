@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
-    public Transform camera;
+    public Transform playerCamera;
 
     [Header("Actions")]
     public InputAction moveAction;
@@ -68,8 +68,8 @@ public class PlayerController : MonoBehaviour
 
         Vector2 inputVector = moveAction.ReadValue<Vector2>();
 
-        Vector3 forward = camera.forward;
-        Vector3 right = camera.right;
+        Vector3 forward = playerCamera.forward;
+        Vector3 right = playerCamera.right;
 
         forward.y = 0f;
         right.y = 0f;
