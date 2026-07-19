@@ -11,7 +11,7 @@ public class FlashlightController : MonoBehaviour
     public InputAction toggleFlashlight;
 
     [Header("Settings")]
-    public float smoothSpeed = 5f;
+    public float smoothSpeed = 7.5f;
 
     private Light light;
 

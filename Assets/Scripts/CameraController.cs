@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
             Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
 
             playerBody.Rotate(Vector3.up * mouseDelta.x * sensitivity);
-
+            
             xRotation -= mouseDelta.y * sensitivity;
             xRotation = Mathf.Clamp(xRotation, lowerLookLimit, upperLookLimit);
 

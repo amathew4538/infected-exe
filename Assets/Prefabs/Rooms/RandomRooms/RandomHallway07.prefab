@@ -1126,7 +1126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Room
   entrancePoint: {fileID: 3355192963550396802}
   exitPoint: {fileID: 8626791738973624773}
-  generator: {fileID: 0}
 --- !u!1 &2218219917275367934
 GameObject:
   m_ObjectHideFlags: 0
