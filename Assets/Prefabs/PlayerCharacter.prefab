@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   playerCamera: {fileID: 8351827560616697526}
+  sprintBar: {fileID: 0}
   moveAction:
     m_Name: Move
     m_Type: 0
@@ -459,7 +460,9 @@ MonoBehaviour:
   sprintDecay: 10
   sprintMult: 2
   sprintPause: 0
-  maxSprintPause: 1
+  maxSprintPause: 2
+  maxFadeDelay: 2
+  fadeDelay: 0
   groundCheck: {fileID: 4171576910972247748}
   groundDistance: 0.4
   groundMask:

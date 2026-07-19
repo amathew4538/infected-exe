@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     public Transform playerCamera;
+    public StatBar sprintBar;
 
     [Header("Actions")]
     public InputAction moveAction;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public float sprintMult = 2.0f;
     public float sprintPause = 0f;
     public float maxSprintPause = 1.0f;
+    public float maxFadeDelay = 1.0f;
+    public float fadeDelay = 0f;
 
     [Header("Ground Check Settings")]
     public Transform groundCheck;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float originalStepOffset;
     private bool isHoldingSprint;
+    private bool isBarVisible = true;
 
     void OnEnable() 
     { 
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         originalStepOffset = controller.stepOffset;
+        sprintBar.SetMaxStat(maxSprint);
     }
 
     // Update is called once per frame
@@ -91,9 +96,16 @@ public class PlayerController : MonoBehaviour
 
         if (isHoldingSprint && sprintValue > 0.0f)
         {
+            if (!isBarVisible)
+            {
+                sprintBar.FadeIn();
+                isBarVisible = true;
+            }
+
             controller.Move(moveDirection * moveSpeed * Time.deltaTime * sprintMult);
             sprintValue = Mathf.Clamp(sprintValue - sprintDecay * Time.deltaTime, 0.0f, maxSprint);
             sprintPause = 0f;
+            sprintBar.UpdateStatValue(sprintValue);
         } 
         else
         {
@@ -104,6 +116,21 @@ public class PlayerController : MonoBehaviour
                 if (sprintPause >= maxSprintPause)
                 {
                     sprintValue = Mathf.Clamp(sprintValue + sprintDecay * Time.deltaTime, 0.0f, maxSprint);
+                    sprintBar.UpdateStatValue(sprintValue);
+
+                    if (isBarVisible && sprintValue >= maxSprint)
+                    {
+                        if (fadeDelay >= maxFadeDelay)
+                        {
+                            fadeDelay = 0f;
+                            sprintBar.FadeOut();
+                            isBarVisible = false; 
+                        }
+                        else
+                        {
+                            fadeDelay += Time.deltaTime;
+                        }
+                    }
                 }
                 else
                 {
