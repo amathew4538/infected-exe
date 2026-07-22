@@ -32,13 +32,13 @@ public class StatBar : MonoBehaviour
     public void FadeOut()
     {
         if (activeFadeRoutine != null) StopCoroutine(activeFadeRoutine);
-        StartCoroutine(FadeRoutine(1f, 0f, fadeOutDuration));
+        activeFadeRoutine = StartCoroutine(FadeRoutine(1f, 0f, fadeOutDuration));
     }
 
     public void FadeIn()
     {
         if (activeFadeRoutine != null) StopCoroutine(activeFadeRoutine);
-        StartCoroutine(FadeRoutine(0f, 1f, fadeInDuration));
+        activeFadeRoutine = StartCoroutine(FadeRoutine(0f, 1f, fadeInDuration));
     }
 
     private IEnumerator FadeRoutine(float startAlpha, float targetAlpha, float duration)
