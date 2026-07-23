@@ -2,18 +2,14 @@
 
 ## Description
 
-A procedurally-generated 3D horror game where you are stuck inside a prototype computer, until, suddenly, the computer gets infected with a virus.
+A procedurally-generated 3D horror game where you are stuck inside a lab simulation as a test subject, when the simulation specimens break out.
+They shouldn't be this agressive, and nobody is letting you out. Find your friends. Escape while you still can.
+
 Made in Unity.
 
-Idea: A Roblox Doors-like game situated within a computer where you must make your way through rooms to escape.
-The game starts off as calm, but, slowly, the horror picks up as a virus takes over the computer.
+Idea: A Roblox Doors-like game situated within a lab where you must make your way through rooms to escape.
+The game starts off as calm, but, slowly, the horror picks up as a grotesque test subjects run through the halls.
 The friends you have been traveling with slowly disappear.
-
-## Story
-
-You have been trapped inside a computer and need to find your way out.
-Progress through the rooms and find the exit.
-Find your friends.
 
 ## Extra Info
 

@@ -45,10 +45,10 @@ Light:
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 1, g: 0.9411765, b: 0.8235294, a: 1}
-  m_Intensity: 20
-  m_Range: 20
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.802082
+  m_Intensity: 10
+  m_Range: 15
+  m_SpotAngle: 51.058823
+  m_InnerSpotAngle: 42.860905
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
     m_Type: 0
@@ -140,8 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6dc0b005dc849fb9f83ab3a35a6ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightManager
-  minIntensity: 15
-  maxIntensity: 20
+  minIntensity: 5
+  maxIntensity: 15
   minDelay: 0.05
   maxDelay: 0.5
   isFlickerEnabled: 0

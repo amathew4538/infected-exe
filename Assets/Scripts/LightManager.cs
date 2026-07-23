@@ -1,11 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
+    public static List<LightManager> AllLights = new();
+
     [Header("Settings")]
-    public float minIntensity = 15f;
-    public float maxIntensity = 20f;
+    public float minIntensity = 5f;
+    public float maxIntensity = 15f;
     public float minDelay = 0.05f;
     public float maxDelay = 0.5f;
 
@@ -15,15 +18,32 @@ public class LightManager : MonoBehaviour
     private Light lightSource;
     private Coroutine flickerCoroutine;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         lightSource = GetComponent<Light>();
+    }
+
+    void OnEnable()
+    {
+        if (!AllLights.Contains(this))
+        {
+            AllLights.Add(this);
+        }
 
         if (isFlickerEnabled)
         {
             EnableFlicker();
         }
+    }
+
+    void OnDisable()
+    {
+        if (AllLights.Contains(this))
+        {
+            AllLights.Remove(this);
+        }
+
+        DisableFlicker();
     }
 
     void Update()
@@ -69,5 +89,20 @@ public class LightManager : MonoBehaviour
 
         lightSource.enabled = true;
         lightSource.intensity = maxIntensity;
+    }
+
+    public void TurnOff()
+    {
+        
+        isFlickerEnabled = false;
+
+        lightSource.enabled = false;
+    }
+
+    public void TurnOn()
+    {
+        isFlickerEnabled = false;
+
+        lightSource.enabled = true;
     }
 }
