@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    // [Header("References")]
+    // public GameObject doorObject;
+
     [Header("Room Settings")]
     public List<Room> randomRooms;
     public List<Room> startingRooms;
@@ -62,6 +65,8 @@ public class MapGenerator : MonoBehaviour
             transform.rotation = lastSpawnedRoom.exitPoint.transform.rotation;
 
             currentSpawnedRooms.Add(lastSpawnedRoom);
+
+            // Instantiate(doorObject, transform.position, transform.rotation);
         }
     }
 
